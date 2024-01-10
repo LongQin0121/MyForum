@@ -6,7 +6,7 @@ from blueprints.qa import  bp as qa_bp
 from blueprints.auth import  bp as auth_bp
 from flask_migrate import Migrate
 
-
+####
 app = Flask(__name__)
 #bind configuration file     ...  app.config['SQLALCHEMY_DATABASE_URI']
 app.config.from_object(config)

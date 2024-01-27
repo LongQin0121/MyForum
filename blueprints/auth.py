@@ -18,6 +18,7 @@ def login():
 def register():
     return render_template("register.html")
 
+# bp.route:如果没有指定method，默认是GET请求 ，，POST
 @bp.route("/captcha/email")
 def get_email_captcha():
     #/captcha/email/<email>
@@ -59,6 +60,6 @@ def mail_test():
         sender="qinlong@fastmail.com",
         recipients=["qinlong0121@gmail.com"],
     )
-    msg.body = "This is saturday_1"
+    msg.body = "This is saturday_1-27"
     mail.send(msg)
     return "Email send successful"

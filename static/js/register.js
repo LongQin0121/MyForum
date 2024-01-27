@@ -1,11 +1,26 @@
 //alert("register.js")
+
 //整个网页都加载完毕后，再执行的的
 $(function(){
     $("#captcha-btn").click(function(event){
-        //prevent default event
         event.preventDefault();
 
-        var email = $("input[name = 'email']").val();
-        alert(email);//print it out
+        var email = $("input[name='email']").val();
+
+        $.ajax({
+            url: "auth/captcha/email?email=" + encodeURIComponent(email),
+            method: "GET",
+            success: function(result) {
+                var code = result['code'];
+                if(code == 200){
+                    alert("Validation Code sending Success");
+                } else {
+                    alert(result['message']);
+                }
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
     });
 });

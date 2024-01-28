@@ -6,6 +6,8 @@ import string
 import random
 from models import EmailCaptchaModel
 
+from .forms import RegisterForm
+
 bp = Blueprint("auth",__name__,url_prefix="/auth")
 
 @bp.route("/login")
@@ -13,10 +15,22 @@ def login():
     #pass
     return render_template("login.html")
 
-
-@bp.route("/register")
+# GET: to get data from sever
+# POST: submit the data from client to sever
+@bp.route("/register",methods=['GET', 'POST'])
 def register():
-    return render_template("register.html")
+    if request.method == 'GET':
+        return render_template("register.html")
+    else:
+        # 验证用户提交的邮箱和验证码是否对应且正确
+        # 表单验证：flask-wtf: wtforms
+        form = RegisterForm(request.form)
+        if form.validate():
+            return "success"
+        else:
+            print(form.errors)
+            return  "fail"
+
 
 # bp.route:如果没有指定method，默认是GET请求 ，，POST
 @bp.route("/captcha/email")

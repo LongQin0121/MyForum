@@ -24,5 +24,5 @@ app.register_blueprint(auth_bp)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 # without this , we would have to use :flask  run --debug

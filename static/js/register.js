@@ -8,7 +8,7 @@ $(function(){
         var email = $("input[name='email']").val();
 
         $.ajax({
-            url: "auth/captcha/email?email=" + encodeURIComponent(email),
+            url: "captcha/email?email=" + email,
             method: "GET",
             success: function(result) {
                 var code = result['code'];
@@ -21,6 +21,6 @@ $(function(){
             error: function(error) {
                 console.log(error);
             }
-        });
+        })
     });
 });

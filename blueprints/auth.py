@@ -24,6 +24,7 @@ def get_email_captcha():
     #/captcha/email/<email>
     # /captcha/email?email = xxx@qq.com   传参
     email = request.args.get("email")
+    
     #4/6 random
     source = string.digits * 4
     captcha = random.sample(source,4)
@@ -41,6 +42,7 @@ def get_email_captcha():
     )
     msg.body = f"Your validation Code is:{captcha}"
     mail.send(msg)
+    
     # memcached/redis
     # use database to store数据库
     email_captcha = EmailCaptchaModel(email=email,captcha=captcha)

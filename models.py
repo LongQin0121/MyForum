@@ -2,7 +2,7 @@ from extensions import db
 from datetime import datetime
 
 class UserModel(db.Model):
-    __tablename__ = "user"
+    __tablename__ = "USER"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(100), nullable=False)

@@ -1,7 +1,7 @@
 import wtforms
 from wtforms.validators import Email, Length, EqualTo, InputRequired
 from models import UserModel, EmailCaptchaModel
-from extensions import db
+from exts import db
 
 
 # Form：主要就是用来验证前端提交的数据是否符合要求

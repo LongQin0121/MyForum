@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, g, redirect, url_for
 from .forms import QuestionForm, AnswerForm
 from models import QuestionModel, AnswerModel
-from extensions import db
+from exts import db
 from decorators import login_required
 
 bp = Blueprint("qa", __name__, url_prefix="/")
@@ -65,3 +65,21 @@ def search():
     q = request.args.get("q")
     questions = QuestionModel.query.filter(QuestionModel.title.contains(q)).all()
     return render_template("index.html", questions=questions)
+
+# url传参
+# 邮件发送
+# ajax
+# orm与数据库
+# Jinja2模板
+# cookie和session原理
+# 搜索
+
+# 前端
+# 部署
+
+# 《Flask全栈开发》：Flask基础增强+前端
+# 《Flask实战》：Flask+Vue前后端分离的论坛系统，WebSocket实战
+
+# 简单项目：
+# 复杂的项目：
+

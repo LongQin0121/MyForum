@@ -12,3 +12,9 @@ def login_required(func):
         else:
             return redirect(url_for("auth.login"))
     return inner
+
+# @login_required
+# def public_question(quesiton_id):
+#     pass
+#
+# login_required(public_question)(question_id)

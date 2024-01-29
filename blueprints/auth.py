@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, jsonify, redirect, url_for, session
-from extensions import mail, db
+from exts import mail, db
 from flask_mail import Message
 from flask import request
 import string
@@ -106,13 +106,6 @@ def get_email_captcha():
 
 @bp.route("/mail/test")
 def mail_test():
-    # message = Message(subject="emailTest",recipients=["842857200@qq.com"],body="This is a test message")
-    # mail.send(message)
-    msg = Message(  # Use Message class instead of EmailMessage
-        "Here is the title",
-        sender="qinlong@fastmail.com",
-        recipients=["qinlong0121@gmail.com"],
-    )
-    msg.body = "This is saturday_1-27"
-    mail.send(msg)
-    return "Email send successful"
+    message = Message(subject="邮箱测试", recipients=["2561884482@qq.com"], body="这是一条测试邮件")
+    mail.send(message)
+    return "邮件发送成功！"

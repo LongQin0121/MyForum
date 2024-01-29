@@ -1,6 +1,6 @@
 from flask import Flask, session, g
 import config
-from extensions import db, mail
+from exts import db, mail
 from models import UserModel
 from blueprints.qa import bp as qa_bp
 from blueprints.auth import bp as auth_bp
@@ -44,4 +44,5 @@ def my_context_processor():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
+    

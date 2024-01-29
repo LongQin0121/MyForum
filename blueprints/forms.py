@@ -1,45 +1,38 @@
-from collections.abc import Mapping, Sequence
-from typing import Any
 import wtforms
-from wtforms.validators import Email,Length,EqualTo, InputRequired
-from models import UserModel,EmailCaptchaModel
+from wtforms.validators import Email, Length, EqualTo, InputRequired
+from models import UserModel, EmailCaptchaModel
 from extensions import db
 
 
-# Form : to verify if the data from front end is in right format
+# Form：主要就是用来验证前端提交的数据是否符合要求
 class RegisterForm(wtforms.Form):
-    email    = wtforms.StringField(validators=[Email(message="Email Format Wrong!")])
-    capthca  = wtforms.StringField(validators=[Length(min =4,max =4,message="Wrong validation code format!")])
-    username = wtforms.StringField(validators=[Length(min =3,max =20,message="Wrong username format!")])
-    password = wtforms.StringField(validators=[Length(min =6,max =20,message="Wrong password format!")])
-    password_confirm = wtforms.StringField(validators=[EqualTo("password")])
+    email = wtforms.StringField(validators=[Email(message="邮箱格式错误！")])
+    captcha = wtforms.StringField(validators=[Length(min=4, max=4, message="验证码格式错误！")])
+    username = wtforms.StringField(validators=[Length(min=3, max=20, message="用户名格式错误！")])
+    password = wtforms.StringField(validators=[Length(min=6, max=20, message="密码格式错误！")])
+    password_confirm = wtforms.StringField(validators=[EqualTo("password", message="两次密码不一致！")])
 
-    #self-define:
-    #1.if the email has been registered
-    
-
-    def validate_email(self,field):
+    # 自定义验证：
+    # 1. 邮箱是否已经被注册
+    def validate_email(self, field):
         email = field.data
         user = UserModel.query.filter_by(email=email).first()
         if user:
-            raise wtforms.ValidationError(message="The email has been registered!")
-        
-    #2.if the validation code is right
-    def validate_captcha(self,field):
+            raise wtforms.ValidationError(message="该邮箱已经被注册！")
+
+    # 2. 验证码是否正确
+    def validate_captcha(self, field):
         captcha = field.data
         email = self.email.data
-        captcha_model = EmailCaptchaModel.query.filter_by(email=email,captcha=captcha).first()
+        captcha_model = EmailCaptchaModel.query.filter_by(email=email, captcha=captcha).first()
         if not captcha_model:
-            raise wtforms.ValidationError(message="Email or validation")
-        #todo：可以删除captcha_model
-        else:
-            db.session.delete(captcha_model)
-            db.session.commit()
+            raise wtforms.ValidationError(message="邮箱或验证码错误！")
+        # else:
+        #     # todo：可以删掉captcha_model
+        #     db.session.delete(captcha_model)
+        #     db.session.commit()
 
-    #另外的方法是写一个脚本，定期清理数据库（一周清理一次）
-    #一个网站的瓶颈就是和数据库打交道，太平凡，没有必要的就不要去做，
-            
-    
+
 class LoginForm(wtforms.Form):
     email = wtforms.StringField(validators=[Email(message="邮箱格式错误！")])
     password = wtforms.StringField(validators=[Length(min=6, max=20, message="密码格式错误！")])

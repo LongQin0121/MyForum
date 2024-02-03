@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}知了传课-注册{% endblock %}
+{% block title %}MyForum-Register{% endblock %}
 
 {% block head %}
   <script src="{{ url_for('static', filename='jquery/jquery.3.6.min.js') }}"></script>
@@ -13,32 +13,32 @@
             <div class="col">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">邮箱</label>
+                        <label for="exampleInputEmail1">Email</label>
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
-                        <small id="emailHelp" class="form-text text-muted">我们不会把邮箱用于其他用户</small>
+                        <small id="emailHelp" class="form-text text-muted">We will not use the email for other purposes</small>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">验证码</label>
+                        <label for="exampleInputEmail1">Verification Code</label>
                         <div class="input-group">
                             <input type="text" class="form-control" name="captcha">
                             <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button" id="captcha-btn">获取验证码</button>
+                                <button class="btn btn-outline-secondary" type="button" id="captcha-btn">Get verification code</button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">用户名</label>
+                        <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">密码</label>
+                        <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">确认密码</label>
+                        <label for="exampleInputPassword1">Confirm Password</label>
                         <input type="password" class="form-control" name="password_confirm">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">立即注册</button>
+                    <button type="submit" class="btn btn-primary btn-block">Register Now</button>
                 </form>
             </div>
             <div class="col"></div>
